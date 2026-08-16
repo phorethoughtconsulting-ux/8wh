@@ -237,9 +237,44 @@
   #connect .stitle{color:#1c1408}#connect .stitle em{color:#6d5416;font-style:italic}
   #connect .ssub{color:#4a3a14}
   #connect .btn.solid{background:#181206;color:#ecd79b}#connect .btn.solid:hover{background:#000;color:#ecd79b;transform:translateY(-2px)}
+
+  /* ═══════════ INTRO LOCKSCREEN (mobile only) — swipe up to enter ═══════════ */
+  #lock{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:#08080a;color:var(--ink);text-align:center;padding:60px 28px;overflow:hidden;
+    transition:transform .6s cubic-bezier(.6,0,.2,1),opacity .55s ease;will-change:transform;touch-action:none;overscroll-behavior:none}
+  #lock.up{transform:translateY(-100%);opacity:0}
+  #lock.dragging{transition:none}
+  .lock-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background-color:#08080a;background-size:cover;background-position:center;
+    background-image:radial-gradient(75% 42% at 50% 90%,rgba(198,161,90,.30),transparent 70%),radial-gradient(46% 30% at 80% 16%,rgba(169,203,221,.08),transparent 70%)}
+  .lock-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,10,.55),transparent 32%,transparent 66%,rgba(8,8,10,.8))}
+  .lock-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+  .lock-theta{width:62px;height:62px;animation:lockglow 3.2s ease-in-out infinite}
+  @keyframes lockglow{0%,100%{filter:drop-shadow(0 0 16px rgba(198,161,90,.45))}50%{filter:drop-shadow(0 0 34px rgba(198,161,90,.85))}}
+  .lock-time{font-family:var(--serif);font-weight:400;font-size:clamp(58px,18vw,88px);letter-spacing:1px;line-height:1;margin-top:22px;color:#f4efe3}
+  .lock-date{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--soft);margin-top:10px;font-weight:600}
+  .lock-word{font-family:var(--serif);font-weight:600;font-size:clamp(23px,6.4vw,29px);margin-top:34px;letter-spacing:.3px}
+  .lock-word b{color:var(--gold)}
+  .lock-tag{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px;margin-top:9px}
+  .lock-swipe{position:absolute;left:0;right:0;bottom:calc(28px + env(safe-area-inset-bottom,0px));z-index:1;display:flex;flex-direction:column;align-items:center;gap:9px;pointer-events:none}
+  .lock-swipe .chev{width:24px;height:24px;border-left:2.4px solid var(--gold);border-top:2.4px solid var(--gold);transform:rotate(45deg);animation:chevup 1.8s ease-in-out infinite}
+  @keyframes chevup{0%,100%{transform:rotate(45deg) translate(5px,5px);opacity:.35}50%{transform:rotate(45deg) translate(-2px,-2px);opacity:1}}
+  .lock-swipe span{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--soft);font-weight:600}
+  body.locked{overflow:hidden}
+  @media(prefers-reduced-motion:reduce){.lock-theta,.lock-swipe .chev{animation:none}#lock{transition:opacity .3s}}
 </style>
 </head>
 <body>
+<div id="lock" role="button" tabindex="0" aria-label="Swipe up to enter 8th Wonder Holdings">
+  <div class="lock-bg" id="lockBg"></div>
+  <div class="lock-inner">
+    <svg class="lock-theta" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.1"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.1"/></svg>
+    <div class="lock-time" id="lockTime">--:--</div>
+    <div class="lock-date" id="lockDate"></div>
+    <div class="lock-word">8th <b>Wonder</b> Holdings</div>
+    <div class="lock-tag">Compound the wonder.</div>
+  </div>
+  <div class="lock-swipe"><div class="chev"></div><span>Swipe up to enter</span></div>
+</div>
 <div class="prog" id="prog" aria-hidden="true"></div>
 
 <nav>
@@ -433,6 +468,31 @@
 
 <script>
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // INTRO LOCKSCREEN (mobile only): swipe up / tap / scroll all enter
+  (function(){
+    var lock=document.getElementById('lock');if(!lock)return;
+    var isMobile=matchMedia('(pointer:coarse)').matches||innerWidth<=900;
+    if(!isMobile){lock.parentNode.removeChild(lock);return;}       // desktop skips the intro
+    document.body.classList.add('locked');
+    function two(n){return (n<10?'0':'')+n;}
+    function tick(){var d=new Date();
+      var t=document.getElementById('lockTime');if(t)t.textContent=two(d.getHours())+':'+two(d.getMinutes());
+      var dt=document.getElementById('lockDate');if(dt)dt.textContent=d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});}
+    tick();var clk=setInterval(tick,10000);
+    var startY=null,dy=0,H=innerHeight,done=false;
+    function enter(){if(done)return;done=true;clearInterval(clk);lock.classList.remove('dragging');lock.style.transform='';lock.style.opacity='';lock.classList.add('up');
+      document.body.classList.remove('locked');setTimeout(function(){if(lock.parentNode)lock.parentNode.removeChild(lock);},650);}
+    lock.addEventListener('touchstart',function(e){if(done)return;startY=e.touches[0].clientY;lock.classList.add('dragging');},{passive:true});
+    lock.addEventListener('touchmove',function(e){if(done||startY===null)return;dy=e.touches[0].clientY-startY;
+      if(dy<0){lock.style.transform='translateY('+dy+'px)';lock.style.opacity=String(Math.max(0,1+dy/(H*0.55)));}},{passive:true});
+    lock.addEventListener('touchend',function(){if(done||startY===null)return;lock.classList.remove('dragging');
+      if(dy<-Math.min(140,H*0.17)){enter();}else{lock.style.transform='';lock.style.opacity='';}startY=null;dy=0;});
+    lock.addEventListener('click',enter);
+    lock.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='ArrowUp'){e.preventDefault();enter();}});
+    addEventListener('wheel',function(){if(!done)enter();},{passive:true,once:true});
+    lock.focus&&setTimeout(function(){try{lock.focus();}catch(e){}},50);
+  })();
 
   // scroll progress
   (function(){var p=document.getElementById('prog');function s(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;p.style.width=(m>0?(scrollY/m*100):0)+'%';}addEventListener('scroll',s,{passive:true});s();})();
