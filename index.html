@@ -209,6 +209,34 @@
     .road{padding-left:32px}.stage .dot{left:-32px}
     .foot{flex-direction:column;text-align:center;gap:8px}
   }
+
+  /* ═══════════ SECTION PALETTE — bold light/dark alternation (POP, not a dark hole) ═══════════ */
+  /* 2 · STATS — warm bronze band */
+  .band{background:linear-gradient(180deg,#251b0e,#191209)!important;border-top:1px solid rgba(198,161,90,.5);border-bottom:1px solid rgba(198,161,90,.5)}
+  .band .from b{color:var(--gold2)}
+  /* 3 · PURPOSE — LIGHT IVORY, high contrast */
+  #purpose{background:linear-gradient(180deg,#f6f1e4,#efe8d6)!important;color:#1c1813}
+  #purpose .eyebrow{color:#9a7a2b}#purpose .eyebrow::before{background:#9a7a2b}
+  #purpose .stitle{color:#171009}#purpose .stitle em{color:#9a7a2b;font-style:italic}
+  #purpose .ssub{color:#5f5442}
+  #purpose .wm{color:rgba(154,122,43,.09)}
+  #purpose .pillar{background:#fffdf7;border:1px solid rgba(28,24,19,.12);box-shadow:0 14px 40px rgba(70,55,20,.08)}
+  #purpose .pillar:hover{border-color:#c19a44;box-shadow:0 22px 54px rgba(70,55,20,.14)}
+  #purpose .pillar::before{background:linear-gradient(180deg,rgba(198,161,90,.22),transparent)}
+  #purpose .pillar .pn{color:#c19a44;opacity:.9}
+  #purpose .pillar h3{color:#171009}
+  #purpose .pillar p{color:#5f5442}
+  /* 4 · COLLECTIVE — warm espresso (not pitch); cards + gold vignette pop */
+  #collective{background:radial-gradient(90% 55% at 50% 0%,rgba(198,161,90,.14),transparent 62%),linear-gradient(180deg,#1c1916,#151310)!important}
+  #collective::before{opacity:.3}
+  /* 6 · VISION — deep warm brown-black, distinct from the hero */
+  #vision{background:linear-gradient(180deg,#13110c,#0f0d09)!important}
+  /* 7 · CONNECT — bold GOLD finale, dark ink */
+  #connect{background:radial-gradient(120% 130% at 50% 0%,#e9ce8b,#c49d47 70%)!important;color:#1c1408}
+  #connect .eyebrow{color:#4c390a}#connect .eyebrow::before{background:#4c390a}
+  #connect .stitle{color:#1c1408}#connect .stitle em{color:#6d5416;font-style:italic}
+  #connect .ssub{color:#4a3a14}
+  #connect .btn.solid{background:#181206;color:#ecd79b}#connect .btn.solid:hover{background:#000;color:#ecd79b;transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -249,7 +277,7 @@
 <section class="band">
   <div class="wrap">
     <div class="stats reveal">
-      <div class="stat"><div class="n" data-count="7">0</div><div class="l">Operators</div></div>
+      <div class="stat"><div class="n" data-count="8">0</div><div class="l">Operators</div></div>
       <div class="stat"><div class="n" data-count="2">0</div><div class="l">Veterans</div></div>
       <div class="stat"><div class="n" data-count="3">0</div><div class="l">MBAs</div></div>
       <div class="stat"><div class="n">∞</div><div class="l">Long-Game</div></div>
@@ -278,7 +306,7 @@
   <div class="wrap">
     <div class="eyebrow reveal">The Collective</div>
     <h2 class="stitle reveal">The people behind the <em>8.</em></h2>
-    <p class="ssub reveal">Seven operators — finance, strategy, operations, technology, and ownership — building together.</p>
+    <p class="ssub reveal">Eight operators — finance, strategy, operations, technology, and ownership — building together.</p>
     <div class="members">
 
       <article class="mcard reveal">
@@ -328,12 +356,6 @@
         <div class="mlinks"><a href="https://linkedin.com/in/marcus-a-white-048261b6" target="_blank" rel="noopener">LinkedIn ↗</a></div>
       </article>
 
-      <article class="mcard soon reveal">
-        <div class="mphoto mono" data-mono="KH"></div>
-        <h3>Kenny Hunter</h3>
-        <div class="mrole">Profile coming</div>
-        <p class="mbio">One of the seven — details on the way.</p>
-      </article>
       <article class="mcard reveal">
         <div class="mphoto mono" data-mono="QG"><img src="assets/quintin.jpg" alt="Quintin Griffith"></div>
         <h3>Quintin Griffith</h3>
@@ -341,6 +363,20 @@
         <div class="mmeta">B.A. Finance (Investments) — UIC · A.A. Finance — Prairie State</div>
         <p class="mbio">An accounting and finance professional with a bank-supervisor and staff-accountant background — financial-statement analysis, reconciliation, and audit support, grounded in an investment-focused finance degree.</p>
         <div class="mlinks"><a href="https://linkedin.com/in/quintin-griffith-" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </article>
+      <article class="mcard reveal">
+        <div class="mphoto mono" data-mono="DW"><img src="assets/dwayne.jpg" alt="Dwayne Wooten"></div>
+        <h3>Dwayne Wooten</h3>
+        <div class="mrole">Fleet Manager, Premier Trucking Group</div>
+        <div class="mmeta">B.S. Computer Science — Loyola University Chicago · A.A. — Triton College</div>
+        <p class="mbio">A fleet and logistics manager overseeing driver performance, scheduling, training, and route planning — pairing operations with a computer-science foundation.</p>
+        <div class="mlinks"><a href="https://www.linkedin.com/in/dwayne-wooten-b642a1b9/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </article>
+      <article class="mcard soon reveal">
+        <div class="mphoto mono" data-mono="KH"></div>
+        <h3>Kenny Hunter</h3>
+        <div class="mrole">Profile coming</div>
+        <p class="mbio">One of the collective — details on the way.</p>
       </article>
 
     </div>
@@ -470,7 +506,12 @@
        degrees:'B.A. Finance (Investments) — UIC · A.A. Finance — Prairie State College',ventures:'',
        bio:`An accounting and finance professional — financial-statement analysis, reconciliation, and audit support, on an investment-focused finance foundation.`,
        linkedin:'https://linkedin.com/in/quintin-griffith-',
-       extra:['Senior Accounting Associate at Packaging Corporation of America','Prior Staff Accountant at AKIRA','Former Supervisor at TCF Bank','QuickBooks · reconciliation · audit support']}
+       extra:['Senior Accounting Associate at Packaging Corporation of America','Prior Staff Accountant at AKIRA','Former Supervisor at TCF Bank','QuickBooks · reconciliation · audit support']},
+      {mono:'DW',name:'Dwayne Wooten',post:'',role:'Fleet Manager, Premier Trucking Group',photo:'assets/dwayne.jpg',
+       degrees:'B.S. Computer Science — Loyola University Chicago · A.A. — Triton College',ventures:'',
+       bio:`A fleet and logistics manager who oversees driver performance, scheduling, training, and route planning — pairing operations experience with a computer-science foundation.`,
+       linkedin:'https://www.linkedin.com/in/dwayne-wooten-b642a1b9/',
+       extra:['Fleet Manager at Premier Trucking Group LLC','Moved up through CarMax, FedEx Freight, and FedEx Express','B.S. Computer Science — Loyola University Chicago','Driver performance · scheduling · training · route planning']}
     ];
     var modal=document.getElementById('pmodal'),body=document.getElementById('pmbody');
     function esc(s){return String(s);}
