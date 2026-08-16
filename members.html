@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>8th Wonder Holdings — Members</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230a0a0c'/%3E%3Ccircle cx='20' cy='20' r='11' fill='none' stroke='%23C6A15B' stroke-width='2.4'/%3E%3Cline x1='13' y1='20' x2='27' y2='20' stroke='%23C6A15B' stroke-width='2.4'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--gold:#C6A15B;--gold2:#E7CC86;--ink:#ECE6D8;--soft:#a79f8f;--ghost:#6d685d;--ice:#A9CBDD;
+    --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+  html,body{overflow-x:hidden}
+  body{background:radial-gradient(130% 90% at 50% -10%,#15121a,#08080a 62%);color:var(--ink);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .theta circle,.theta line{stroke:var(--gold)}
+
+  /* ── GATE ── */
+  #gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px}
+  .gate-card{width:min(420px,100%);text-align:center;background:linear-gradient(180deg,#15151b,#0c0c10);border:1px solid rgba(198,161,90,.28);
+    border-radius:22px;padding:clamp(30px,6vw,46px) clamp(24px,5vw,38px);box-shadow:0 40px 100px rgba(0,0,0,.6)}
+  .gate-card svg{width:56px;height:56px;filter:drop-shadow(0 0 22px rgba(198,161,90,.5));margin-bottom:18px}
+  .g-eye{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .gate-card h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:12px 0 6px}
+  .gate-card p{color:var(--soft);font-size:14px;margin-bottom:22px}
+  #gform{display:flex;flex-direction:column;gap:12px}
+  #pw{font-family:var(--sans);font-size:20px;text-align:center;letter-spacing:8px;color:var(--ink);background:#0c0c10;
+    border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:15px;outline:none;transition:border-color .2s}
+  #pw:focus{border-color:var(--gold)}
+  #gform button{font-family:var(--sans);font-weight:600;font-size:15px;color:#0a0a0c;background:var(--gold);border:none;border-radius:12px;padding:15px;cursor:pointer;transition:.2s}
+  #gform button:hover{background:var(--gold2);transform:translateY(-1px)}
+  .err{color:#e88b8b;font-size:13px;margin-top:14px;font-weight:500;opacity:0;transition:opacity .2s}
+  .err.show{opacity:1}
+  .gate-card.shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .g-note{color:var(--ghost);font-size:12px;margin-top:22px}
+
+  /* ── DASHBOARD ── */
+  #dash[hidden]{display:none}
+  .dtop{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,40px);border-bottom:1px solid rgba(255,255,255,.07);
+    position:sticky;top:0;background:rgba(10,10,12,.7);backdrop-filter:blur(12px);z-index:10}
+  .dtop .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:18px}
+  .dtop .brand b{color:var(--gold)}
+  .dtop .brand svg{width:24px;height:24px}
+  .dtop-r{display:flex;align-items:center;gap:14px}
+  .dtag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;border:1px solid rgba(198,161,90,.35);border-radius:20px;padding:5px 12px}
+  .lockbtn{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--soft);background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:8px 14px;cursor:pointer;transition:.2s}
+  .lockbtn:hover{color:var(--gold);border-color:var(--gold)}
+  .dwrap{max-width:1000px;margin:0 auto;padding:clamp(28px,5vw,52px) clamp(20px,5vw,40px)}
+  .dhead .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .dhead h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.6vw,40px);letter-spacing:-.5px;margin:12px 0 6px}
+  .dhead p{color:var(--soft);font-size:16px}
+  .dsec{margin-top:44px}
+  .dsec-h{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .dsec-h::before{content:'';width:20px;height:1px;background:var(--gold)}
+  .dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .dcard{display:flex;gap:16px;align-items:center;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 22px;
+    background:linear-gradient(180deg,rgba(22,22,28,.9),rgba(14,14,18,.9));transition:.22s}
+  a.dcard:hover{transform:translateY(-4px);border-color:rgba(198,161,90,.45);box-shadow:0 24px 56px rgba(0,0,0,.5)}
+  .dc-ic{flex:none;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:600;font-size:13px;color:var(--gold);background:rgba(198,161,90,.12);border:1px solid rgba(198,161,90,.3);letter-spacing:.5px}
+  .dc-b h3{font-family:var(--serif);font-weight:600;font-size:18px}
+  .dc-b p{color:var(--soft);font-size:13.5px;margin-top:3px}
+  .dc-link{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:600;color:var(--gold);letter-spacing:.4px}
+  a.dcard:hover .dc-link{color:var(--gold2)}
+  .dcard.soon{opacity:.55}
+  .dc-soon{display:inline-block;margin-top:9px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ghost)}
+  .dfoot{margin-top:52px;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);font-size:12.5px;color:var(--ghost);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(max-width:520px){.dcard{flex-direction:column;text-align:center;align-items:flex-start}.dc-b{width:100%}}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-card" id="gcard">
+    <svg class="theta" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.1"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.1"/></svg>
+    <div class="g-eye">Members Only</div>
+    <h1>8th Wonder Holdings</h1>
+    <p>Enter the members passcode to continue.</p>
+    <form id="gform">
+      <input id="pw" type="password" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="••••" aria-label="Passcode">
+      <button type="submit">Enter &rarr;</button>
+    </form>
+    <div class="err" id="err">Incorrect passcode — try again.</div>
+    <div class="g-note">For members of 8th Wonder Holdings.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" hidden>
+  <header class="dtop">
+    <a href="index.html" class="brand"><svg class="theta" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.4"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.4"/></svg>8th <b>Wonder</b></a>
+    <div class="dtop-r"><span class="dtag">Members</span><button id="lock" class="lockbtn">Lock &times;</button></div>
+  </header>
+  <main class="dwrap">
+    <div class="dhead">
+      <div class="eyebrow">Dashboard</div>
+      <h2>Welcome, members.</h2>
+      <p>Everything for the collective, in one place.</p>
+    </div>
+
+    <section class="dsec">
+      <div class="dsec-h">Meetings</div>
+      <div class="dcards">
+        <a class="dcard" href="assets/meeting-agenda.pdf" target="_blank" rel="noopener">
+          <div class="dc-ic">PDF</div>
+          <div class="dc-b"><h3>1-Hour Meeting Agenda</h3><p>Roles, contributions &amp; the next 90 days.</p><span class="dc-link">Open PDF &nearr;</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="dsec">
+      <div class="dsec-h">More coming</div>
+      <div class="dcards">
+        <div class="dcard soon"><div class="dc-ic">&#9673;</div><div class="dc-b"><h3>Documents</h3><p>Agreements, structure, filings.</p><span class="dc-soon">Coming soon</span></div></div>
+        <div class="dcard soon"><div class="dc-ic">&#9673;</div><div class="dc-b"><h3>Portfolio</h3><p>Holdings &amp; performance.</p><span class="dc-soon">Coming soon</span></div></div>
+        <div class="dcard soon"><div class="dc-ic">&#9673;</div><div class="dc-b"><h3>Contributions</h3><p>Who&rsquo;s paid in, and when.</p><span class="dc-soon">Coming soon</span></div></div>
+      </div>
+    </section>
+
+    <div class="dfoot"><span>8th Wonder Holdings — Members</span><span>Compound the wonder.</span></div>
+  </main>
+</div>
+
+<script>
+  (function(){
+    var PW=atob('MDE5MQ==');                 // soft gate only — NOT server-side secure (password is in the page)
+    var gate=document.getElementById('gate'),dash=document.getElementById('dash'),card=document.getElementById('gcard');
+    function unlock(){gate.style.display='none';dash.hidden=false;try{sessionStorage.setItem('m8wh','1');}catch(e){}}
+    try{if(sessionStorage.getItem('m8wh')==='1')unlock();}catch(e){}
+    document.getElementById('gform').addEventListener('submit',function(e){e.preventDefault();
+      var v=(document.getElementById('pw').value||'').trim();
+      if(v===PW){unlock();}
+      else{var err=document.getElementById('err');err.classList.add('show');card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+        var pw=document.getElementById('pw');pw.value='';pw.focus();}});
+    document.getElementById('lock').addEventListener('click',function(){try{sessionStorage.removeItem('m8wh');}catch(e){}location.reload();});
+    document.getElementById('pw').focus();
+  })();
+</script>
+</body>
+</html>
