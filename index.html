@@ -181,7 +181,8 @@
   .pmodal .x{position:absolute;top:14px;right:16px;width:40px;height:40px;border:none;background:rgba(255,255,255,.06);color:var(--ink);border-radius:50%;cursor:pointer;font-size:15px;transition:.2s}
   .pmodal .x:hover{background:rgba(198,161,90,.2);color:var(--gold)}
   .pm-photo{width:112px;height:112px;border-radius:50%;overflow:hidden;position:relative;margin-bottom:20px;border:1.5px solid var(--gold);box-shadow:0 0 0 5px rgba(198,161,90,.08),0 0 30px rgba(169,203,221,.18)}
-  .pm-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.03) brightness(.96)}
+  .pm-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.06) contrast(1.02)}
+  .pm-photo::after{opacity:.35}
   .pm-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(198,161,90,.22),transparent 55%,rgba(169,203,221,.16));mix-blend-mode:overlay}
   .pm-photo.mono img{display:none}
   .pm-photo.mono{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1c1c24,#101014)}
