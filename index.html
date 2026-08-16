@@ -160,6 +160,36 @@
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.scrollcue i{animation:none}}
 
+  /* ══ CLICKABLE PROFILES + MODAL ══ */
+  .mcard.click{cursor:pointer}
+  .mview{margin-top:15px;font-size:12.5px;font-weight:600;color:var(--gold);letter-spacing:.4px;opacity:.7;transition:opacity .2s,letter-spacing .2s}
+  .mcard.click:hover .mview{opacity:1;letter-spacing:1px}
+  .pmodal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+  .pmodal.open{display:flex}
+  .pmodal .backdrop{position:absolute;inset:0;background:rgba(4,4,6,.82);backdrop-filter:blur(6px)}
+  .pmodal .panel{position:relative;z-index:1;width:min(560px,100%);max-height:90vh;overflow-y:auto;background:linear-gradient(180deg,#15151b,#0c0c10);
+    border:1px solid rgba(198,161,90,.3);border-radius:20px;padding:clamp(26px,5vw,40px);box-shadow:0 40px 100px rgba(0,0,0,.7);transform:translateY(16px);opacity:0;transition:transform .3s,opacity .3s}
+  .pmodal.open .panel{transform:none;opacity:1}
+  .pmodal .x{position:absolute;top:14px;right:16px;width:40px;height:40px;border:none;background:rgba(255,255,255,.06);color:var(--ink);border-radius:50%;cursor:pointer;font-size:15px;transition:.2s}
+  .pmodal .x:hover{background:rgba(198,161,90,.2);color:var(--gold)}
+  .pm-photo{width:112px;height:112px;border-radius:50%;overflow:hidden;position:relative;margin-bottom:20px;border:1.5px solid var(--gold);box-shadow:0 0 0 5px rgba(198,161,90,.08),0 0 30px rgba(169,203,221,.18)}
+  .pm-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.03) brightness(.96)}
+  .pm-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(198,161,90,.22),transparent 55%,rgba(169,203,221,.16));mix-blend-mode:overlay}
+  .pm-photo.mono img{display:none}
+  .pm-photo.mono{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1c1c24,#101014)}
+  .pm-photo.mono::before{content:attr(data-mono);font-family:var(--serif);font-weight:600;font-size:38px;color:var(--gold)}
+  .pm-name{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.1}
+  .pm-name .post{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1px;margin-left:8px}
+  .pm-role{color:var(--ice);font-weight:500;font-size:15px;margin-top:7px}
+  .pm-meta{color:var(--ghost);font-size:13px;margin-top:9px}
+  .pm-meta.v{color:var(--gold)}
+  .pm-bio{color:var(--soft);font-size:15px;margin-top:18px;line-height:1.66}
+  .pm-extra{margin-top:18px;list-style:none;display:grid;gap:10px}
+  .pm-extra li{position:relative;padding-left:20px;font-size:14px;color:var(--ink)}
+  .pm-extra li::before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  .pm-connect{margin-top:26px;padding-top:22px;border-top:1px solid rgba(198,161,90,.2);text-align:center}
+  .pm-connect .q{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);margin-bottom:15px}
+
   /* ══ MOBILE-FIRST tuning ══ */
   @media(max-width:900px){
     .nlinks{display:none}.navtog{display:flex;align-items:center;justify-content:center}
@@ -360,6 +390,11 @@
   </div>
 </footer>
 
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Member profile">
+  <div class="backdrop" data-close></div>
+  <div class="panel"><button class="x" id="pmx" aria-label="Close profile">✕</button><div class="pm-body" id="pmbody"></div></div>
+</div>
+
 <script>
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
@@ -402,6 +437,71 @@
   // connect → email (dropped in when you give it)
   (function(){document.querySelectorAll('.bookmail').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();
     var enc=b.getAttribute('data-c');if(enc){location.href='mailto:'+atob(enc)+'?subject='+encodeURIComponent('8th Wonder Holdings — Inquiry');}else{location.href='#collective';}});});})();
+
+  // clickable member profiles → modal (data in DOM order of the real cards)
+  (function(){
+    var P=[
+      {mono:'NB',name:'Nicholas Barnes',post:'',role:'Founder & Creative Technologist',photo:'assets/nick.jpg',
+       degrees:'B.S. Kinesiology, UIC · Software Engineering, Fullstack Academy',ventures:'Phorethought · MyOpsGrade',
+       bio:`An operator who builds — a large-scale operations leader turned founder who designs and ships custom software and AI systems.`,
+       linkedin:'https://linkedin.com/in/nicholasbarnes1',
+       extra:['Four years running large-scale operations at Amazon','Founder of Phorethought, a creative technology studio','Builder of MyOpsGrade, an operations-intelligence SaaS','Bridges operations and hands-on software / AI development']},
+      {mono:'JM',name:'James McCord',post:'MBA',role:'Finance Manager, Walgreens',photo:'assets/james.jpg',
+       degrees:'MBA, Finance & Investments — University of Notre Dame · B.A. Economics — UIC',ventures:'',
+       bio:`A Notre Dame MBA in finance and investments with experience across private equity, investment banking, and equity valuation.`,
+       linkedin:'https://linkedin.com/in/james--mccord',
+       extra:['Private Equity MBA Intern — Graham Allen Partners','Investment Banking Summer Associate — Cornhusker Capital','Equity Valuation Teaching Assistant — Notre Dame (Mendoza)','APICS Certified Supply Chain Professional']},
+      {mono:'AG',name:'Antonio Gonzalez',post:'MBA',role:'Controllership Sr. Associate, JLL · USMC Veteran',photo:'assets/antonio.jpg',
+       degrees:'MBA, Strategy — Notre Dame (Mendoza) · B.S. Finance — UIC',ventures:'',
+       bio:`A strategy and finance leader and Marine Corps veteran, turning fragmented manual processes into scalable financial frameworks.`,
+       linkedin:'https://linkedin.com/in/aagonzalez9',
+       extra:['Oversees controllership on a $17.8B commercial real estate portfolio','U.S. Marine Corps veteran','Workday Financials · Sage Intacct · Lean Six Sigma','Prior accounting roles at Kemper, GTI, and Uptake']},
+      {mono:'KD',name:'Keyth Dickerson II',post:'MBA',role:'Northeast Territory Manager, IFC · US Army Veteran',photo:'assets/keyth.jpg',
+       degrees:'MBA, Supply Chain & Operations — UIC · BBA — UIC',ventures:'Co-Owner, INTENSE! Pest Control',
+       bio:`A HACCP- and PCQI-certified food-safety and compliance leader, Army veteran, and business owner. Operations, built to standard.`,
+       linkedin:'https://linkedin.com/in/keyth-dickerson-ii-mba-1281b7229',
+       extra:['Co-Owner of INTENSE! Pest Control','U.S. Army veteran','HACCP & PCQI certified — food safety & GMP compliance','Manages a multi-state sales & service territory for IFC']},
+      {mono:'MW',name:'Marcus A. White',post:'',role:'Associate, Adams Street Partners',photo:'assets/marcus.jpg',
+       degrees:'B.A. Economics — UIC · Former UIC Men’s Basketball',ventures:'',
+       bio:`A private-markets investor at Adams Street Partners with an institutional due-diligence background — and a competitor’s discipline.`,
+       linkedin:'https://linkedin.com/in/marcus-a-white-048261b6',
+       extra:['Associate at Adams Street Partners (private markets)','Prior due diligence at Northern Trust Asset Management','Former UIC men’s basketball point guard','High-school basketball coach — Jones College Prep']},
+      {mono:'QG',name:'Quintin Griffith',post:'',role:'Senior Accounting Associate, Packaging Corp. of America',photo:'assets/quintin.jpg',
+       degrees:'B.A. Finance (Investments) — UIC · A.A. Finance — Prairie State College',ventures:'',
+       bio:`An accounting and finance professional — financial-statement analysis, reconciliation, and audit support, on an investment-focused finance foundation.`,
+       linkedin:'https://linkedin.com/in/quintin-griffith-',
+       extra:['Senior Accounting Associate at Packaging Corporation of America','Prior Staff Accountant at AKIRA','Former Supervisor at TCF Bank','QuickBooks · reconciliation · audit support']}
+    ];
+    var modal=document.getElementById('pmodal'),body=document.getElementById('pmbody');
+    function esc(s){return String(s);}
+    function open(p){
+      var extra=(p.extra||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+      var v=p.ventures?'<div class="pm-meta v">Ventures: '+esc(p.ventures)+'</div>':'';
+      var conn=p.linkedin?'<div class="pm-connect"><div class="q">Want to connect?</div><a class="btn solid" href="'+p.linkedin+'" target="_blank" rel="noopener">Connect on LinkedIn ↗</a></div>':'';
+      body.innerHTML='<div class="pm-photo mono" data-mono="'+p.mono+'"><img src="'+p.photo+'" alt="'+esc(p.name)+'"></div>'
+        +'<div class="pm-name">'+esc(p.name)+(p.post?'<span class="post">'+p.post+'</span>':'')+'</div>'
+        +'<div class="pm-role">'+esc(p.role)+'</div><div class="pm-meta">'+esc(p.degrees)+'</div>'+v
+        +'<p class="pm-bio">'+esc(p.bio)+'</p>'+(extra?'<ul class="pm-extra">'+extra+'</ul>':'')+conn;
+      var img=body.querySelector('.pm-photo img'),box=body.querySelector('.pm-photo');
+      img.addEventListener('load',function(){if(img.naturalWidth>1)box.classList.remove('mono');});
+      img.addEventListener('error',function(){box.classList.add('mono');});
+      if(img.complete&&img.naturalWidth>1)box.classList.remove('mono');
+      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    }
+    function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+    document.getElementById('pmx').addEventListener('click',close);
+    modal.querySelector('.backdrop').addEventListener('click',close);
+    addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+    var ri=0;
+    [].slice.call(document.querySelectorAll('#collective .mcard')).forEach(function(card){
+      if(card.classList.contains('soon'))return;
+      var p=P[ri++];if(!p)return;
+      card.classList.add('click');
+      var ml=card.querySelector('.mlinks');if(ml)ml.parentNode.removeChild(ml);
+      var cue=document.createElement('div');cue.className='mview';cue.textContent='View profile →';card.appendChild(cue);
+      card.addEventListener('click',function(){open(p);});
+    });
+  })();
 
   // hero canvas — gold + ice node network, cursor-reactive
   (function(){var c=document.getElementById('fx');if(!c||reduce)return;var x=c.getContext('2d');
