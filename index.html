@@ -603,10 +603,18 @@
     document.getElementById('pmx').addEventListener('click',close);
     modal.querySelector('.backdrop').addEventListener('click',close);
     addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
-    var ri=0;
+    // sort member cards alphabetically by FIRST name (Kenny placeholder sorts in too)
+    var wrap=document.querySelector('#collective .members');
+    if(wrap){[].slice.call(wrap.querySelectorAll('.mcard')).sort(function(a,b){
+        var fa=a.querySelector('h3').textContent.trim().split(/\s+/)[0].toLowerCase(),
+            fb=b.querySelector('h3').textContent.trim().split(/\s+/)[0].toLowerCase();
+        return fa<fb?-1:(fa>fb?1:0);
+      }).forEach(function(c){wrap.appendChild(c);});}
+    // wire each real card to its profile by monogram (order-independent)
     [].slice.call(document.querySelectorAll('#collective .mcard')).forEach(function(card){
       if(card.classList.contains('soon'))return;
-      var p=P[ri++];if(!p)return;
+      var mp=card.querySelector('.mphoto'),mono=mp?mp.getAttribute('data-mono'):null;
+      var p=P.filter(function(x){return x.mono===mono;})[0];if(!p)return;
       card.classList.add('click');
       var ml=card.querySelector('.mlinks');if(ml)ml.parentNode.removeChild(ml);
       var cue=document.createElement('div');cue.className='mview';cue.textContent='View profile →';card.appendChild(cue);
