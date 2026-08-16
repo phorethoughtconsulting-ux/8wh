@@ -9,158 +9,184 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230a0a0c'/%3E%3Ccircle cx='20' cy='20' r='11' fill='none' stroke='%23C6A15B' stroke-width='2.4'/%3E%3Cline x1='13' y1='20' x2='27' y2='20' stroke='%23C6A15B' stroke-width='2.4'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="8th Wonder Holdings">
-<meta property="og:description" content="A holding company and investment collective. Invest. Build. Give back. — playing the long game.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta property="og:description" content="A holding company and investment collective. Invest. Build. Give back.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --bg:#0a0a0c; --bg2:#101014; --panel:#141419; --panel2:#1a1a21;
-    --line:rgba(198,161,90,.16); --line2:rgba(255,255,255,.07);
-    --gold:#C6A15B; --gold2:#E2C580; --gold-deep:#8a6d2f;
-    --ice:#A9CBDD; --ice2:#d3e6f0;
-    --ink:#ECE6D8; --soft:#a79f8f; --ghost:#6f6a5f;
+    --gold:#C6A15B; --gold2:#E7CC86; --gold-deep:#7c611f;
+    --ice:#A9CBDD; --ice2:#dcecf4;
+    --ink:#ECE6D8; --soft:#a79f8f; --ghost:#6d685d;
     --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
   }
   html{scroll-behavior:smooth}
   html,body{overflow-x:hidden}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(120% 80% at 50% -6%,#131118,#08080a 60%)}
-  /* drifting warm-gold + cool-ice aurora */
-  body::before{content:'';position:fixed;inset:-25%;z-index:-2;pointer-events:none;opacity:.9;
-    background:
-      radial-gradient(38% 40% at 22% 16%,rgba(198,161,90,.12),transparent 66%),
-      radial-gradient(34% 36% at 82% 24%,rgba(169,203,221,.07),transparent 68%),
-      radial-gradient(46% 48% at 68% 84%,rgba(198,161,90,.10),transparent 70%);
-    animation:aurora 40s ease-in-out infinite alternate;will-change:transform}
-  @keyframes aurora{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(3%,-3%,0) scale(1.08)}}
-  @media(prefers-reduced-motion:reduce){body::before{animation:none}}
-  .grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.045;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  body{background:#0a0a0c;color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
-  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:11px}
-  .eyebrow::before{content:'';width:26px;height:1px;background:var(--gold)}
-  .theta{flex:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,28px)}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:11px}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
   .theta circle,.theta line{stroke:var(--gold)}
 
+  /* scroll progress */
+  .prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--gold),var(--ice));box-shadow:0 0 12px rgba(198,161,90,.5)}
+
   /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,12,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line2)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1180px;margin:0 auto;padding:0 28px}
-  .brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:.3px}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,12,.6);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,28px)}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:17px}
   .brand b{color:var(--gold)}
-  .nlinks{display:flex;align-items:center;gap:30px;list-style:none}
+  .nlinks{display:flex;align-items:center;gap:28px;list-style:none}
   .nlinks a{font-size:14px;color:var(--soft);transition:color .2s}.nlinks a:hover{color:var(--ink)}
-  .nbtn{font-size:13px;font-weight:600;letter-spacing:.4px;color:var(--bg)!important;background:var(--gold);padding:9px 18px;border-radius:8px;transition:.2s}
+  .nbtn{font-size:13px;font-weight:600;color:#0a0a0c!important;background:var(--gold);padding:9px 17px;border-radius:8px;transition:.2s}
   .nbtn:hover{background:var(--gold2);transform:translateY(-1px)}
-  .navtog{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;min-width:44px;min-height:44px}
+  .navtog{display:none;background:none;border:none;color:var(--ink);font-size:23px;cursor:pointer;width:44px;height:44px}
 
-  /* HERO */
-  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px 0 70px;overflow:hidden}
-  .hero-emblem{width:76px;height:76px;margin-bottom:26px;filter:drop-shadow(0 0 26px rgba(198,161,90,.35))}
-  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(44px,8vw,96px);line-height:.98;letter-spacing:-1.5px}
-  .hero h1 .num{color:var(--gold);text-shadow:0 0 48px rgba(198,161,90,.4)}
-  .hero .quote{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(18px,2.6vw,26px);color:var(--ink);max-width:640px;margin:26px 0 6px;line-height:1.4}
-  .hero .qby{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600}
-  .hero .lead{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--soft);max-width:560px;margin-top:26px}
-  .hero .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
-  .btn{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.3px;padding:15px 28px;border-radius:9px;transition:.2s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px}
-  .btn.solid{background:var(--gold);color:var(--bg)}.btn.solid:hover{background:var(--gold2);transform:translateY(-1px)}
-  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
-  .hairline{margin-top:44px;height:1px;max-width:420px;background:linear-gradient(90deg,var(--gold),rgba(169,203,221,.4),transparent)}
+  .btn{font-family:var(--sans);font-weight:600;font-size:14px;padding:15px 28px;border-radius:9px;transition:.2s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px}
+  .btn.solid{background:var(--gold);color:#0a0a0c}.btn.solid:hover{background:var(--gold2);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(198,161,90,.4)}.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
 
-  /* SECTION */
-  section{padding:104px 0;position:relative}
-  section,header{scroll-margin-top:84px}
-  .slabel{margin-bottom:16px}
-  .stitle{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,50px);letter-spacing:-1px;line-height:1.06}
+  /* ══ SECTION 1 · HERO — black, live canvas ══ */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 0 64px;overflow:hidden;
+        background:radial-gradient(130% 90% at 50% -10%,#15121a,#08080a 62%)}
+  #fx{position:absolute;inset:0;z-index:0;opacity:.85}
+  .hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+        background:radial-gradient(50% 60% at 30% 40%,rgba(198,161,90,.10),transparent 70%),linear-gradient(180deg,transparent 70%,#08080a)}
+  .hero .wrap{position:relative;z-index:2}
+  .hero-emblem{width:70px;height:70px;margin-bottom:24px;filter:drop-shadow(0 0 28px rgba(198,161,90,.45))}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(46px,9vw,102px);line-height:.95;letter-spacing:-2px}
+  .hero h1 .num{color:var(--gold);text-shadow:0 0 54px rgba(198,161,90,.5)}
+  .hero .quote{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.5vw,25px);color:var(--ink);max-width:640px;margin:26px 0 8px;line-height:1.42}
+  .hero .qby{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .hero .lead{font-size:clamp(15px,2vw,18px);font-weight:300;color:var(--soft);max-width:560px;margin-top:24px}
+  .hero .cta{display:flex;gap:13px;margin-top:36px;flex-wrap:wrap}
+  .scrollcue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ghost);display:flex;align-items:center;gap:8px}
+  .scrollcue i{width:26px;height:1px;background:var(--ghost);animation:cue 2s infinite}
+  @keyframes cue{0%,100%{opacity:.3}50%{opacity:1}}
+
+  /* ══ SECTION 2 · STATS BAND — darkest, gold-ruled, animated counters ══ */
+  .band{background:#050506;border-top:1px solid rgba(198,161,90,.22);border-bottom:1px solid rgba(198,161,90,.22);padding:48px 0}
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(28px,7vw,84px);text-align:center}
+  .stat .n{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6vw,58px);color:var(--gold);line-height:1}
+  .stat .l{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-top:8px;font-weight:500}
+  .from{text-align:center;margin-top:36px;color:var(--ghost);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  .from b{color:var(--soft);font-weight:500}
+
+  /* ══ SECTION 3 · PURPOSE — charcoal, giant Θ watermark, pillar sweep ══ */
+  #purpose{position:relative;padding:clamp(80px,10vw,120px) 0;background:#0e0e12;overflow:hidden}
+  #purpose .wm{position:absolute;right:-4%;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(340px,50vw,620px);line-height:1;color:rgba(198,161,90,.035);pointer-events:none;z-index:0}
+  #purpose .wrap{position:relative;z-index:1}
+  .stitle{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,50px);letter-spacing:-1px;line-height:1.06;margin-top:14px}
   .stitle em{font-style:italic;color:var(--gold)}
   .ssub{color:var(--soft);font-weight:300;font-size:17px;max-width:600px;margin-top:14px}
-
-  /* PILLARS */
-  #purpose{background:linear-gradient(180deg,transparent,rgba(20,20,25,.5) 50%,transparent)}
-  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
-  .pillar{border:1px solid var(--line2);border-radius:16px;padding:34px 30px;background:var(--panel);transition:.24s;position:relative;overflow:hidden}
-  .pillar::after{content:'';position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:.24s}
-  .pillar:hover{border-color:var(--line);transform:translateY(-4px);background:var(--panel2)}
-  .pillar:hover::after{opacity:1}
-  .pillar .pn{font-family:var(--serif);font-size:15px;color:var(--gold);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
-  .pillar h3{font-family:var(--serif);font-weight:600;font-size:23px;margin-bottom:10px}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+  .pillar{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px 28px;background:rgba(20,20,26,.6);overflow:hidden;transition:transform .25s,border-color .25s}
+  .pillar::before{content:'';position:absolute;left:0;bottom:0;width:100%;height:0;background:linear-gradient(180deg,rgba(198,161,90,.14),transparent);transition:height .3s;z-index:0}
+  .pillar:hover{transform:translateY(-5px);border-color:rgba(198,161,90,.4)}
+  .pillar:hover::before{height:100%}
+  .pillar>*{position:relative;z-index:1}
+  .pillar .pn{font-family:var(--serif);font-size:34px;font-weight:600;color:var(--gold);opacity:.5;line-height:1}
+  .pillar h3{font-family:var(--serif);font-weight:600;font-size:23px;margin:14px 0 10px}
   .pillar p{color:var(--soft);font-size:14.5px}
 
-  /* COLLECTIVE */
-  #collective{background:linear-gradient(180deg,transparent,rgba(198,161,90,.05) 4%,transparent 12%)}
-  .members{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:52px}
-  .mcard{width:calc(33.333% - 14px);min-width:290px;border:1px solid var(--line2);border-radius:18px;padding:26px;background:var(--panel);transition:.24s;display:flex;flex-direction:column}
-  .mcard:hover{border-color:var(--line);transform:translateY(-4px);box-shadow:0 26px 60px rgba(0,0,0,.5)}
-  .mphoto{position:relative;width:92px;height:92px;border-radius:50%;overflow:hidden;margin-bottom:18px;border:1.5px solid var(--gold);
-    box-shadow:0 0 0 4px rgba(198,161,90,.08),0 0 24px rgba(169,203,221,.12)}
-  .mphoto img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.03) brightness(.96)}
-  .mphoto::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,rgba(198,161,90,.22),transparent 55%,rgba(169,203,221,.14));mix-blend-mode:overlay}
+  /* ══ SECTION 4 · COLLECTIVE — gallery, gold vignette + faint grid ══ */
+  #collective{position:relative;padding:clamp(80px,10vw,120px) 0;background:
+      radial-gradient(90% 50% at 50% 0%,rgba(198,161,90,.09),transparent 60%),
+      linear-gradient(180deg,#0a0a0c,#0c0c10);}
+  #collective::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+      background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px);background-size:100% 46px}
+  #collective .wrap{position:relative;z-index:1}
+  .members{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:48px}
+  .mcard{width:calc(33.333% - 12px);min-width:280px;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px;
+      background:linear-gradient(180deg,rgba(22,22,28,.9),rgba(14,14,18,.9));transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+  .mcard:hover{transform:translateY(-5px);border-color:rgba(198,161,90,.4);box-shadow:0 28px 64px rgba(0,0,0,.55),0 0 40px rgba(169,203,221,.06)}
+  .mphoto{position:relative;width:88px;height:88px;border-radius:50%;overflow:hidden;margin-bottom:16px;border:1.5px solid var(--gold);
+      box-shadow:0 0 0 4px rgba(198,161,90,.08),0 0 22px rgba(169,203,221,.14);transition:box-shadow .25s}
+  .mcard:hover .mphoto{box-shadow:0 0 0 4px rgba(198,161,90,.14),0 0 30px rgba(169,203,221,.3)}
+  .mphoto img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.03) brightness(.96);transition:filter .3s,transform .4s}
+  .mcard:hover .mphoto img{filter:grayscale(.4) contrast(1.05);transform:scale(1.05)}
+  .mphoto::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,rgba(198,161,90,.22),transparent 55%,rgba(169,203,221,.16));mix-blend-mode:overlay}
   .mphoto.mono img{display:none}
-  .mphoto.mono{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1b1b22,#101014)}
-  .mphoto.mono::before{content:attr(data-mono);font-family:var(--serif);font-weight:600;font-size:30px;color:var(--gold);letter-spacing:1px}
+  .mphoto.mono{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1c1c24,#101014)}
+  .mphoto.mono::before{content:attr(data-mono);font-family:var(--serif);font-weight:600;font-size:29px;color:var(--gold)}
   .mcard h3{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.15}
-  .mcard h3 .post{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1px;margin-left:6px}
-  .mrole{font-size:13.5px;color:var(--ice);font-weight:500;margin-top:5px}
-  .mmeta{font-size:12.5px;color:var(--ghost);margin-top:10px;line-height:1.5}
-  .mbio{font-size:14px;color:var(--soft);margin-top:14px;flex:1}
-  .mbiz{margin-top:14px;font-size:12.5px;color:var(--ink);border-top:1px solid var(--line2);padding-top:12px}
+  .mcard h3 .post{font-family:var(--sans);font-size:11.5px;font-weight:600;color:var(--gold);letter-spacing:1px;margin-left:6px}
+  .mrole{font-size:13px;color:var(--ice);font-weight:500;margin-top:5px}
+  .mmeta{font-size:12px;color:var(--ghost);margin-top:10px;line-height:1.5}
+  .mbio{font-size:13.5px;color:var(--soft);margin-top:13px;flex:1}
+  .mbiz{margin-top:13px;font-size:12px;color:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding-top:11px}
   .mbiz b{color:var(--gold);font-weight:600}
-  .mlinks{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
-  .mlinks a{font-size:12.5px;font-weight:600;letter-spacing:.4px;color:var(--gold);display:inline-flex;align-items:center;gap:5px;border-bottom:1px solid var(--line);padding-bottom:2px;transition:.2s}
+  .mlinks{margin-top:15px}
+  .mlinks a{font-size:12px;font-weight:600;color:var(--gold);border-bottom:1px solid rgba(198,161,90,.35);padding-bottom:2px;transition:.2s}
   .mlinks a:hover{color:var(--gold2);border-color:var(--gold)}
-  .mcard.soon{opacity:.62;border-style:dashed}
-  .mcard.soon .mrole{color:var(--ghost)}
+  .mcard.soon{opacity:.6;border-style:dashed}.mcard.soon .mrole{color:var(--ghost)}
 
-  /* VISION */
-  #vision{background:linear-gradient(180deg,transparent,rgba(20,20,25,.5) 50%,transparent)}
-  .road{margin-top:52px;display:grid;gap:0}
-  .stage{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-top:1px solid var(--line2);align-items:baseline}
-  .stage:last-child{border-bottom:1px solid var(--line2)}
-  .stage .sp{font-family:var(--serif);font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-  .stage h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:7px}
+  /* ══ SECTION 5 · INTERLUDE — LIGHT ICE band, hard contrast ══ */
+  .interlude{text-align:center;padding:clamp(100px,15vw,180px) 0;position:relative;
+      background:linear-gradient(180deg,#0a0a0c 0%,#e9eff3 9%,#d7e4ec 50%,#e6eef4 91%,#0a0a0c 100%)}
+  .interlude .eyebrow{color:#2b6a86;justify-content:center}
+  .interlude .eyebrow::before{background:#2b6a86}
+  .il-line{font-family:var(--serif);font-weight:600;color:#0c1620;letter-spacing:-1px;line-height:1.12;
+      font-size:clamp(30px,5vw,54px);max-width:900px;margin:20px auto 0}
+  .il-line b{color:#a5842f}
+  .il-sub{color:#3a4a58;font-weight:400;font-size:clamp(15px,2vw,18.5px);max-width:600px;margin:22px auto 0}
+
+  /* ══ SECTION 6 · VISION — dark, illuminating timeline ══ */
+  #vision{background:#08080a;padding:clamp(80px,10vw,120px) 0}
+  .road{margin-top:52px;position:relative;padding-left:38px}
+  .road::before{content:'';position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:rgba(255,255,255,.09)}
+  .road .fill{position:absolute;left:9px;top:8px;width:2px;height:0;background:linear-gradient(180deg,var(--gold),var(--ice));box-shadow:0 0 12px rgba(198,161,90,.4);transition:height .1s linear}
+  .stage{position:relative;padding:0 0 40px}
+  .stage:last-child{padding-bottom:0}
+  .stage .dot{position:absolute;left:-38px;top:4px;width:20px;height:20px;border-radius:50%;background:#08080a;border:2px solid rgba(255,255,255,.18);transition:.3s}
+  .stage.lit .dot{border-color:var(--gold);box-shadow:0 0 0 5px rgba(198,161,90,.12),0 0 18px rgba(198,161,90,.5)}
+  .stage .sp{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .stage h3{font-family:var(--serif);font-weight:600;font-size:23px;margin:6px 0 7px}
   .stage p{color:var(--soft);font-size:14.5px;max-width:560px}
-  @media(max-width:640px){.stage{grid-template-columns:1fr;gap:6px}}
 
-  /* CONNECT */
-  #connect{text-align:center}
-  #connect .stitle{margin-top:16px}
+  /* ══ SECTION 7 · CONNECT — gold-forward closing band ══ */
+  #connect{text-align:center;padding:clamp(90px,12vw,140px) 0;
+      background:radial-gradient(90% 100% at 50% 100%,rgba(198,161,90,.16),transparent 60%),linear-gradient(180deg,#0c0b08,#08080a)}
+  #connect .stitle{margin-top:14px}
   #connect .ssub{margin:14px auto 0}
-  .cbtns{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+  .cbtns{margin-top:34px}
 
-  footer{border-top:1px solid var(--line2);padding:34px 0}
+  footer{border-top:1px solid rgba(255,255,255,.07);padding:32px 0;background:#050506}
   .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-  .foot small{color:var(--ghost);font-size:12.5px}
-  .foot .credit a{color:var(--soft);border-bottom:1px solid var(--line)}
+  .foot small{color:var(--ghost);font-size:12px}
+  .foot .credit a{color:var(--soft);border-bottom:1px solid rgba(198,161,90,.3)}
 
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1)}
   .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.scrollcue i{animation:none}}
 
+  /* ══ MOBILE-FIRST tuning ══ */
   @media(max-width:900px){
     .nlinks{display:none}.navtog{display:flex;align-items:center;justify-content:center}
-    .nlinks.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:#0a0a0c;border-bottom:1px solid var(--line2);padding:8px 0}
-    .nlinks.open li{width:100%}.nlinks.open a{display:block;padding:14px 28px}.nlinks.open .nbtn{margin:10px 28px;text-align:center}
-    .pillars{grid-template-columns:1fr}
-    .mcard{width:calc(50% - 10px)}
-    section{padding:78px 0}
+    .nlinks.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:#0a0a0c;border-bottom:1px solid rgba(255,255,255,.08);padding:8px 0}
+    .nlinks.open li{width:100%}.nlinks.open a{display:block;padding:15px 24px}.nlinks.open .nbtn{margin:10px 24px;text-align:center}
+    .pillars{grid-template-columns:1fr;gap:14px}
+    .mcard{width:calc(50% - 9px)}
   }
-  @media(max-width:640px){
-    .wrap{padding:0 22px}
+  @media(max-width:600px){
+    .hero{min-height:100svh;padding:100px 0 70px}
+    .hero h1{font-size:clamp(52px,17vw,84px)}
+    .hero .cta{gap:10px}.hero .cta .btn{flex:1;justify-content:center;padding:16px 14px}
+    .stats{gap:26px 40px}
+    #purpose .wm{font-size:70vw;right:-20%;opacity:1;color:rgba(198,161,90,.04)}
     .mcard{width:100%}
-    .hero{min-height:100svh;padding:104px 0 54px}
+    .il-line{font-size:clamp(28px,8vw,40px)}
+    .road{padding-left:32px}.stage .dot{left:-32px}
+    .foot{flex-direction:column;text-align:center;gap:8px}
   }
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
+<div class="prog" id="prog" aria-hidden="true"></div>
 
 <nav>
   <div class="nav">
-    <a href="#top" class="brand">
-      <svg class="theta" width="26" height="26" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.4"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.4"/></svg>
-      8th <b>Wonder</b>
-    </a>
+    <a href="#top" class="brand"><svg class="theta" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.4"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.4"/></svg>8th <b>Wonder</b></a>
     <button class="navtog" id="navtog" aria-label="Menu" aria-expanded="false">☰</button>
     <ul class="nlinks" id="nlinks">
       <li><a href="#purpose">Purpose</a></li>
@@ -171,41 +197,56 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- 1 · HERO -->
 <header class="hero" id="top">
+  <canvas id="fx" aria-hidden="true"></canvas>
   <div class="wrap">
-    <svg class="hero-emblem reveal" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.2"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.2"/></svg>
-    <div class="eyebrow slabel reveal">Holding Company · Investment Collective</div>
-    <h1 class="reveal"><span class="num">8</span>th Wonder<br>Holdings</h1>
+    <svg class="hero-emblem reveal" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.1"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.1"/></svg>
+    <div class="eyebrow reveal">Holding Company · Investment Collective</div>
+    <h1 class="reveal" style="margin-top:14px"><span class="num">8</span>th Wonder<br>Holdings</h1>
     <p class="quote reveal">"Compound interest is the eighth wonder of the world. He who understands it, earns it — he who doesn't, pays it."</p>
     <div class="qby reveal">— Albert Einstein</div>
-    <p class="lead reveal">A collective of operators, veterans, and builders — investing in stocks and ventures, building companies, and giving back. Patience, taste, and the long game.</p>
+    <p class="lead reveal">A collective of operators, veterans, and builders — investing in markets and ventures, building companies, and giving back. Patience, taste, and the long game.</p>
     <div class="cta reveal">
       <a href="#collective" class="btn solid">Meet the collective →</a>
       <a href="#connect" class="btn ghost">Connect</a>
     </div>
-    <div class="hairline reveal"></div>
   </div>
+  <div class="scrollcue"><i></i> Scroll</div>
 </header>
 
-<!-- PURPOSE -->
-<section id="purpose">
+<!-- 2 · STATS BAND -->
+<section class="band">
   <div class="wrap">
-    <div class="eyebrow slabel reveal">What we are</div>
+    <div class="stats reveal">
+      <div class="stat"><div class="n" data-count="7">0</div><div class="l">Operators</div></div>
+      <div class="stat"><div class="n" data-count="2">0</div><div class="l">Veterans</div></div>
+      <div class="stat"><div class="n" data-count="3">0</div><div class="l">MBAs</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l">Long-Game</div></div>
+    </div>
+    <p class="from reveal">Backgrounds from <b>Notre Dame · Adams Street Partners · JLL · Northern Trust · Amazon · U.S. Marine Corps · U.S. Army</b></p>
+  </div>
+</section>
+
+<!-- 3 · PURPOSE -->
+<section id="purpose">
+  <div class="wm" aria-hidden="true">Θ</div>
+  <div class="wrap">
+    <div class="eyebrow reveal">What we are</div>
     <h2 class="stitle reveal">More than a fund — a <em>collective.</em></h2>
-    <p class="ssub reveal">8th Wonder Holdings is a holding company built by a group of operators who understand that real wealth compounds — in the market, in businesses, and in community.</p>
+    <p class="ssub reveal">8th Wonder Holdings is a holding company built by operators who understand that real wealth compounds — in the market, in businesses, and in community.</p>
     <div class="pillars">
-      <div class="pillar reveal"><div class="pn">01 — Invest</div><h3>Invest</h3><p>Positions in public markets and equity in private ventures — deployed with discipline and a long horizon.</p></div>
-      <div class="pillar reveal"><div class="pn">02 — Build</div><h3>Build</h3><p>Operating companies and consulting — we don't just fund businesses, we know how to run them.</p></div>
-      <div class="pillar reveal"><div class="pn">03 — Give Back</div><h3>Give Back</h3><p>Giveaways, fundraising, and — the goal — scholarships that put real wealth-building in the hands of our community.</p></div>
+      <div class="pillar reveal"><div class="pn">01</div><h3>Invest</h3><p>Positions in public markets and equity in private ventures — deployed with discipline and a long horizon.</p></div>
+      <div class="pillar reveal"><div class="pn">02</div><h3>Build</h3><p>Operating companies and consulting — we don't just fund businesses, we know how to run them.</p></div>
+      <div class="pillar reveal"><div class="pn">03</div><h3>Give Back</h3><p>Giveaways, fundraising, and — the goal — scholarships that put real wealth-building into our community.</p></div>
     </div>
   </div>
 </section>
 
-<!-- COLLECTIVE -->
+<!-- 4 · COLLECTIVE -->
 <section id="collective">
   <div class="wrap">
-    <div class="eyebrow slabel reveal">The Collective</div>
+    <div class="eyebrow reveal">The Collective</div>
     <h2 class="stitle reveal">The people behind the <em>8.</em></h2>
     <p class="ssub reveal">Seven operators — finance, strategy, operations, technology, and ownership — building together.</p>
     <div class="members">
@@ -253,13 +294,13 @@
         <h3>Marcus A. White</h3>
         <div class="mrole">Associate, Adams Street Partners</div>
         <div class="mmeta">B.A. Economics — UIC · Former UIC Men's Basketball</div>
-        <p class="mbio">A private-markets investor at Adams Street Partners, with prior due-diligence and institutional asset-management experience at Northern Trust — a former UIC point guard who brings that same discipline to the portfolio.</p>
+        <p class="mbio">A private-markets investor at Adams Street Partners, with prior due-diligence and institutional asset-management experience at Northern Trust — a former UIC point guard who brings that discipline to the portfolio.</p>
         <div class="mlinks"><a href="https://linkedin.com/in/marcus-a-white-048261b6" target="_blank" rel="noopener">LinkedIn ↗</a></div>
       </article>
 
       <article class="mcard soon reveal">
-        <div class="mphoto mono" data-mono="Θ"></div>
-        <h3>Brother</h3>
+        <div class="mphoto mono" data-mono="KH"></div>
+        <h3>Kenny Hunter</h3>
         <div class="mrole">Profile coming</div>
         <p class="mbio">One of the seven — details on the way.</p>
       </article>
@@ -274,72 +315,106 @@
   </div>
 </section>
 
-<!-- VISION -->
+<!-- 5 · INTERLUDE (light) -->
+<section class="interlude">
+  <div class="wrap">
+    <div class="eyebrow reveal">The ethos</div>
+    <p class="il-line reveal">Compounding isn't only money. It's <b>people, patience,</b> and time.</p>
+    <p class="il-sub reveal">We play the long game — in the portfolio, in the businesses we build, and in the community we lift.</p>
+  </div>
+</section>
+
+<!-- 6 · VISION -->
 <section id="vision">
   <div class="wrap">
-    <div class="eyebrow slabel reveal">The Vision</div>
+    <div class="eyebrow reveal">The Vision</div>
     <h2 class="stitle reveal">Where the <em>8</em> is going.</h2>
     <p class="ssub reveal">A holding company today. A movement in motion.</p>
-    <div class="road">
-      <div class="stage reveal"><div class="sp">Now</div><div><h3>Invest &amp; Consult</h3><p>Deploying capital across markets and ventures, and offering the group's operating expertise as a consulting service.</p></div></div>
-      <div class="stage reveal"><div class="sp">Next</div><div><h3>Community &amp; Brand</h3><p>Driving traffic and building an audience — giveaways, fundraising for events, and email-driven community that compounds like the portfolio.</p></div></div>
-      <div class="stage reveal"><div class="sp">Then</div><div><h3>Scholarships</h3><p>Turning the brand's momentum into scholarships — putting real opportunity into the hands of individuals in our community.</p></div></div>
-      <div class="stage reveal"><div class="sp">Building to</div><div><h3>The Platform</h3><p>A monthly podcast to start, scaling in frequency — sharing the playbook on wealth, business, and the long game.</p></div></div>
+    <div class="road" id="road">
+      <div class="fill" id="roadfill"></div>
+      <div class="stage"><span class="dot"></span><div class="sp">Now</div><h3>Invest &amp; Consult</h3><p>Deploying capital across markets and ventures, and offering the group's operating expertise as a consulting service.</p></div>
+      <div class="stage"><span class="dot"></span><div class="sp">Next</div><h3>Community &amp; Brand</h3><p>Building an audience — giveaways, fundraising for events, and email-driven community that compounds like the portfolio.</p></div>
+      <div class="stage"><span class="dot"></span><div class="sp">Then</div><h3>Scholarships</h3><p>Turning momentum into scholarships — real opportunity in the hands of individuals in our community.</p></div>
+      <div class="stage"><span class="dot"></span><div class="sp">Building to</div><h3>The Platform</h3><p>A monthly podcast to start, scaling in frequency — sharing the playbook on wealth, business, and the long game.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CONNECT -->
+<!-- 7 · CONNECT -->
 <section id="connect">
   <div class="wrap">
-    <div class="eyebrow slabel reveal" style="justify-content:center">Connect</div>
+    <div class="eyebrow reveal" style="justify-content:center">Connect</div>
     <h2 class="stitle reveal">Build with the <em>8.</em></h2>
     <p class="ssub reveal">A partnership, an investment conversation, or a consulting engagement — reach out and let's talk.</p>
-    <div class="cbtns reveal">
-      <a class="btn solid bookmail" data-c="" href="#">Get in touch →</a>
-    </div>
+    <div class="cbtns reveal"><a class="btn solid bookmail" data-c="" href="#">Get in touch →</a></div>
   </div>
 </section>
 
 <footer>
   <div class="wrap foot">
-    <a href="#top" class="brand"><svg class="theta" width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.6"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.6"/></svg>8th <b>Wonder</b> Holdings</a>
+    <a href="#top" class="brand"><svg class="theta" width="20" height="20" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke-width="2.6"/><line x1="11" y1="20" x2="29" y2="20" stroke-width="2.6"/></svg>8th <b>Wonder</b> Holdings</a>
     <small>© 2026 8th Wonder Holdings</small>
     <small class="credit">Site by <a href="https://phorethoughtconsulting-ux.github.io/phorethought-site/" rel="noopener">Phorethought</a></small>
   </div>
 </footer>
 
 <script>
-  // photo → monogram fallback: image only shows if it actually loads
-  (function(){
-    document.querySelectorAll('.mphoto img').forEach(function(img){
-      var box=img.closest('.mphoto');
-      if(!img.getAttribute('src')){return;}
-      img.addEventListener('load',function(){ if(img.naturalWidth>1) box.classList.remove('mono'); });
-      img.addEventListener('error',function(){ box.classList.add('mono'); });
-      // if already errored/cached
-      if(img.complete && img.naturalWidth>1){ box.classList.remove('mono'); }
-    });
-  })();
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  // reveals
-  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+  // scroll progress
+  (function(){var p=document.getElementById('prog');function s(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;p.style.width=(m>0?(scrollY/m*100):0)+'%';}addEventListener('scroll',s,{passive:true});s();})();
+
+  // photo → monogram fallback
+  (function(){document.querySelectorAll('.mphoto img').forEach(function(img){var b=img.closest('.mphoto');
+    if(!img.getAttribute('src'))return;
+    img.addEventListener('load',function(){if(img.naturalWidth>1)b.classList.remove('mono');});
+    img.addEventListener('error',function(){b.classList.add('mono');});
+    if(img.complete&&img.naturalWidth>1)b.classList.remove('mono');});})();
+
+  // reveals + staggered grids
+  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-   document.querySelectorAll('.members .mcard, .pillars .pillar').forEach(function(c,i){c.style.transitionDelay=(i%3*70)+'ms';});})();
+   document.querySelectorAll('.members .mcard,.pillars .pillar').forEach(function(c,i){c.style.transitionDelay=(i%3*70)+'ms';});})();
+
+  // animated counters
+  (function(){var done=false;var band=document.querySelector('.stats');if(!band)return;
+   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!done){done=true;
+     document.querySelectorAll('.stat .n[data-count]').forEach(function(el){var t=+el.getAttribute('data-count'),s=null;
+       function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1);el.textContent=Math.round(p*t);if(p<1)requestAnimationFrame(step);}
+       if(reduce){el.textContent=t;}else requestAnimationFrame(step);});
+     io.disconnect();}});},{threshold:.5});io.observe(band);})();
+
+  // vision timeline — fill grows + dots light as you pass
+  (function(){var road=document.getElementById('road'),fill=document.getElementById('roadfill');if(!road)return;
+   var stages=[].slice.call(road.querySelectorAll('.stage'));
+   function upd(){var r=road.getBoundingClientRect(),vh=innerHeight;
+     var prog=Math.min(Math.max((vh*0.72-r.top)/(r.height),0),1);fill.style.height=(prog*100)+'%';
+     stages.forEach(function(st){var sr=st.querySelector('.dot').getBoundingClientRect();if(sr.top<vh*0.75)st.classList.add('lit');});}
+   addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
 
   // mobile nav
   (function(){var t=document.getElementById('navtog'),n=document.getElementById('nlinks');
    if(t&&n){t.onclick=function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o);};
      n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');t.setAttribute('aria-expanded','false');});});}})();
 
-  // connect button → email (address dropped in when you give it; falls back to a note)
-  (function(){document.querySelectorAll('.bookmail').forEach(function(b){
-    b.addEventListener('click',function(e){e.preventDefault();
-      var enc=b.getAttribute('data-c');
-      if(enc){window.location.href='mailto:'+atob(enc)+'?subject='+encodeURIComponent('8th Wonder Holdings — Inquiry');}
-      else{window.location.href='#collective';}
-    });
-  });})();
+  // connect → email (dropped in when you give it)
+  (function(){document.querySelectorAll('.bookmail').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();
+    var enc=b.getAttribute('data-c');if(enc){location.href='mailto:'+atob(enc)+'?subject='+encodeURIComponent('8th Wonder Holdings — Inquiry');}else{location.href='#collective';}});});})();
+
+  // hero canvas — gold + ice node network, cursor-reactive
+  (function(){var c=document.getElementById('fx');if(!c||reduce)return;var x=c.getContext('2d');
+   var W,H,DPR,nodes=[],mx=-999,my=-999;
+   function size(){W=innerWidth;H=Math.max(innerHeight,560);DPR=Math.min(2,devicePixelRatio||1);c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);
+     var n=Math.min(innerWidth<700?34:64,Math.floor(W/24));nodes=[];for(var i=0;i<n;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,g:Math.random()>.35});}
+   addEventListener('resize',size);size();
+   addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});addEventListener('mouseleave',function(){mx=-999;my=-999;});
+   function loop(){requestAnimationFrame(loop);if(document.hidden)return;x.clearRect(0,0,W,H);
+     for(var i=0;i<nodes.length;i++){var p=nodes[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+       var dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<130){var f=(130-d)/130*.5;p.x+=dx/d*f;p.y+=dy/d*f;}}
+     for(var a=0;a<nodes.length;a++)for(var b=a+1;b<nodes.length;b++){var A=nodes[a],B=nodes[b],dd=Math.hypot(A.x-B.x,A.y-B.y);
+       if(dd<128){x.strokeStyle='rgba(198,161,90,'+(.12*(1-dd/128))+')';x.lineWidth=1;x.beginPath();x.moveTo(A.x,A.y);x.lineTo(B.x,B.y);x.stroke();}}
+     for(var k=0;k<nodes.length;k++){var q=nodes[k];x.fillStyle=q.g?'rgba(198,161,90,.6)':'rgba(169,203,221,.5)';x.beginPath();x.arc(q.x,q.y,1.6,0,7);x.fill();}}
+   loop();})();
 </script>
 </body>
 </html>
